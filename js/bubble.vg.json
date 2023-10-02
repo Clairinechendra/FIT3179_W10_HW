@@ -1,0 +1,143 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 400,
+    "data": {
+      "url": "https://raw.githubusercontent.com/Clairinechendra/FIT3179_A2/main/Edu%20Data/learningoutcome_cleaned.csv"
+    },
+    "params": [
+      {
+        "name": "Population_Above",
+        "value": 0,
+        "bind": {
+          "input": "range",
+          "min": 0,
+          "max": 100000000,
+          "step": 1000000,
+          "name": "Minimum Population: "
+        }
+      },
+      {
+        "name": "Continent_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "North America",
+            "South America",
+            "Europe",
+            "Africa",
+            "Asia",
+            "Oceania"
+          ],
+          "labels": [
+            "Show All",
+            "North America",
+            "South America",
+            "Europe",
+            "Africa",
+            "Asia",
+            "Oceania"
+          ],
+          "name": "Continent Selection: "
+        }
+      }
+    ],
+    "transform": [
+        {"filter": "datum.Population > Population_Above"},
+        {
+          "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+        }
+      ],
+    "encoding": {
+      "x": {
+        "field": "Learning1985",
+        "type": "quantitative",
+        "title": "Learning outcome in 1985",
+        "axis": {"tickCount": 7},
+        "scale": {"domain": [100, 700]}
+      },
+      "y": {
+        "field": "Learning2015",
+        "type": "quantitative",
+        "title": "Learning outcome in 2015",
+        "axis": {"tickCount": 6},
+        "scale": {"domain": [100, 700]}
+      }
+    },
+    "layer": [
+      {
+        "mark": "circle",
+        "encoding": {
+          "size": {
+            "field": "Population",
+            "type": "quantitative",
+            "scale": {
+              "type": "threshold",
+              "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+              "range": [10, 50, 150, 200, 300, 400]
+            },
+            "legend": {"format": ".1s"}
+          },
+          "color": {
+            "field": "Continent",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "North America",
+                "South America",
+                "Europe",
+                "Africa",
+                "Asia",
+                "Oceania"
+              ],
+              "range": [
+                "#e41a1c",
+                "#984ea3",
+                "#ff7f00",
+                "#a6cee3",
+                "#377eb8",
+                "#a65628"
+              ]
+            }
+          },
+          "opacity": {"value": 0.6},
+          "tooltip": [
+            {"field": "Continent", "type": "nominal"},
+            {"field": "Country", "type": "nominal"},
+            {"field": "Population", "type": "quantitative", "format": ","},
+            {"field": "Learning2015", "type": "quantitative", "format": ",", "title": "Learning outcome in 2015"},
+            {"field": "Learning1985", "type": "quantitative", "format": ",", "title": "Learning outcome in 1985"}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "Country", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": "datum['Country'] == 'Taiwan' || datum['Country'] == 'Singapore' || datum['Country'] == 'Australia' || datum['Country'] == 'New Zealand' || datum['Country'] == 'Jordan' || datum['Country'] == 'Latvia' ||  datum['Country'] == 'United States'",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Continent", "type": "nominal"},
+            {"field": "Country", "type": "nominal"},
+            {"field": "Population", "type": "quantitative", "format": ","},
+            {"field": "Learning2015", "type": "quantitative", "format": ",", "title": "Learning outcome scores in 2015"},
+            {"field": "Learning1985", "type": "quantitative", "format": ",", "title": "Learning outcome scores in 1985"}
+          ]
+        }
+      }
+    ]
+  }
