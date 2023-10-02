@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Import Vega & Vega-Lite-->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Analysis on Global Education</title>
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+
+    <body id="page-top">
+        <!-- World Map-->
+            <div class="container">
+                <div class="text-center">
+                <hr class="sep">
+                    <h2 class="section-heading text-uppercase">Average Schooling Years in 2020</h2>
+                    <hr class="sep">
+                </div>
+                <div class="row text-center">
+                    <div id="map"></div>
+                </div>
+            </div>
+        
+
+         <!-- Bubble Chart-->
+         <div class="container">
+            <div class="text-center">
+            <hr class="sep">
+                <h2 class="section-heading text-uppercase">Worldwide Learning Outcomes in 2015 vs 1985</h2>
+                <hr class="sep">
+            </div>
+            <div class="row text-center">
+                <div id="bubble"></div>
+            </div>
+        </div>
+
+    </section>       
+
+        <script type="text/javascript">
+                
+        var spec1 = "js/map.vg.json";
+        vegaEmbed('#map', spec1, { "actions": false }).then(function (result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+
+        var spec2 = "js/bubble.vg.json";
+        vegaEmbed('#bubble', spec2, { "actions": false }).then(function (result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+
+
+        </script>
+    </body>
+</html>
