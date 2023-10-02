@@ -134,8 +134,8 @@
           {"field": "Continent", "type": "nominal"},
           {"field": "Country", "type": "nominal"},
           {"field": "Population", "type": "quantitative", "format": ","},
-          {"field": "Learning2015", "type": "quantitative", "format": ",", "title": "Learning outcome scores in 2015"},
-          {"field": "Learning1985", "type": "quantitative", "format": ",", "title": "Learning outcome scores in 1985"}
+          {"field": "Learning2015", "type": "quantitative", "format": ",", "title": "Learning outcome (2015)"},
+          {"field": "Learning1985", "type": "quantitative", "format": ",", "title": "Learning outcome (1985)"}
         ]
       }
     }
